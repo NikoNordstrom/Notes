@@ -1,0 +1,43 @@
+@font-family: "Arial", "Helvetica", "sans-serif";
+@background-color: darken(#fff, 5%);
+
+body {
+    margin: 0;
+    font-size: 62.5%;
+    font-family: @font-family;
+}
+
+input {
+    border: 0;
+}
+
+.App {
+    width: 100vw;
+    height: 100vh;
+    background: @background-color;
+}
+
+.AddNoteForm {
+    @padding: 12px;
+    @font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    min-width: 300px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid darken(@background-color, 10%);
+    border-radius: 4px;
+    background: #fff;
+    .note-title {
+        padding: 8px;
+        font-size: @font-size;
+        &:focus {
+            outline: 0;
+        }
+    }
+    .note-content {
+        .note-title();
+        border-top: 1px solid darken(@background-color, 10%);
+    }
+}
