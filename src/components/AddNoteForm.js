@@ -5,7 +5,11 @@ export default class AddNoteForm extends Component {
         return (
             <form className="AddNoteForm" action="">
                 <input className="note-title" type="text" placeholder="Title" />
-                <input className="note-content" type="text" placeholder="Write a note..." />
+                <textarea className="note-content" rows={3} placeholder="Write a note..." />
+                <div className="btn-container">
+                    <button className="cancel">Cancel</button>
+                    <button className="save">Save</button>
+                </div>
             </form>
         );
     }

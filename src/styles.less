@@ -1,43 +1,177 @@
-@font-family: "Arial", "Helvetica", "sans-serif";
-@background-color: darken(#fff, 5%);
+@heading-family: "Montserrat", "Arial", "Helvetica", "sans-serif";
+@content-family: "Quicksand", "Arial", "Helvetica", "sans-serif";
+@font-color: darken(#fff, 60%);
+@primary-color: darken(#fff, 5%);
+@secondary-color: darken(#fff, 25%);
+@tablet: ~"max-width: 768px";
+@mobile: ~"max-width: 625px";
+@sidebar-width: 300px;
 
 body {
     margin: 0;
     font-size: 62.5%;
-    font-family: @font-family;
-}
-
-input {
-    border: 0;
+    font-family: @content-family;
 }
 
 .App {
+    display: flex;
     width: 100vw;
     height: 100vh;
-    background: @background-color;
+    background: @primary-color;
+    .container {
+        width: 100vw;
+        height: 100%;
+        padding: 100px 8px 0 8px;
+        box-sizing: border-box;
+        @media only screen and (@tablet) {
+            padding-top: 30px;
+        }
+    }
+}
+
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: @sidebar-width;
+    min-width: @sidebar-width;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    border-right: 1px solid @secondary-color;
+    background: #fff;
+    @media only screen and (@mobile) {
+        display: none;
+    }
+}
+
+.Note {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-bottom: 1px solid @secondary-color;
+    color: @font-color;
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-bottom: 4px;
+        font-size: 1.8em;
+        font-weight: bold;
+        font-family: @heading-family;
+        .date {
+            font-size: 0.8em;
+        }
+    }
+    .content {
+        height: 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        border: 0;
+        font-size: 1.6em;
+        font-family: @content-family;
+    }
+    .icons {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 4px;
+        i {
+            user-select: none;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .AddNoteForm {
-    @padding: 12px;
-    @font-size: 2em;
+    @max-width: 600px;
+    @border-style: 1px solid @secondary-color;
     display: flex;
     flex-direction: column;
-    max-width: 600px;
-    min-width: 300px;
-    padding: 8px;
+    max-width: @max-width;
+    min-width: @max-width / 2;
+    margin: auto;
+    padding: 12px;
     box-sizing: border-box;
-    border: 1px solid darken(@background-color, 10%);
+    border: @border-style;
     border-radius: 4px;
     background: #fff;
-    .note-title {
-        padding: 8px;
-        font-size: @font-size;
+    .pseudos() {
         &:focus {
             outline: 0;
         }
+        &::placeholder {
+            color: @secondary-color;
+        }
+    }
+    .note-title {
+        .pseudos();
+        height: 40px;
+        padding-bottom: 12px;
+        box-sizing: border-box;
+        border: 0;
+        font-size: 2.2em;
+        font-family: @heading-family;
+        font-weight: bold;
+        color: @font-color;
+        border-bottom: @border-style;
     }
     .note-content {
-        .note-title();
-        border-top: 1px solid darken(@background-color, 10%);
+        .pseudos();
+        padding: 12px 0;
+        border: 0;
+        resize: none;
+        font-size: 2em;
+        font-family: @content-family;
+        color: @font-color;
+    }
+    .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        height: 32px;
+        margin-top: 12px;
+        box-sizing: border-box;
+        button {
+            width: 100px;
+            margin-right: 12px;
+            border: @border-style;
+            border-radius: 2px;
+            font-size: 1.6em;
+            font-family: @heading-family;
+            color: @font-color;
+            background: #fff;
+            &:last-child {
+                margin-right: 0;
+            }
+            &:hover {
+                cursor: pointer;
+                background: darken(#fff, 10%);
+            }
+            &:active {
+                transform: translateY(1px);
+            }
+            &:focus {
+                outline: 0;
+            }
+        }
+        .save {
+            @bg-color: #7289da;
+            border: 0;
+            color: #fff;
+            background: @bg-color;
+            &:hover {
+                background: darken(@bg-color, 10%);
+            }
+        }
+        @media only screen and (@tablet) {
+            button {
+                flex: 1;
+            }
+        }
     }
 }
