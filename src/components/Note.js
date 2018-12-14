@@ -10,7 +10,7 @@ export default class Note extends Component {
                 </div>
                 <div className="content">{this.props.content}</div>
                 <div className="icons">
-                    <i className="material-icons">arrow_forward</i>
+                    <i className="material-icons icon">arrow_forward</i>
                 </div>
             </div>
         );
