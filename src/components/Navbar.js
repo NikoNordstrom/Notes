@@ -7,9 +7,11 @@ export default class Navbar extends Component {
                 <ul>
                     <i className="material-icons icon">menu</i>
                 </ul>
-                <ul className="login">
-                    <li>Logout</li>
-                    <i className="material-icons fab icon">&#xf0d5;</i>
+                <ul>
+                    <li><b>{this.props.displayName}</b></li>
+                </ul>
+                <ul className="logout">
+                    <a href="/logout" className="material-icons icon" title="Logout">power_settings_new</a>
                 </ul>
             </nav>
         );

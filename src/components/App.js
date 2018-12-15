@@ -8,13 +8,13 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false
+            displayName: this.props.user.displayName
         };
     }
     render() {
         return (
             <div className="App">
-                <Navbar />
+                <Navbar displayName={this.state.displayName} />
                 <div className="flex-container">
                     <Sidebar />
                     <div className="container">

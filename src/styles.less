@@ -37,7 +37,7 @@ body {
             padding: 100px 8px 0 8px;
             box-sizing: border-box;
             @media only screen and (@tablet) {
-                padding-top: 30px;
+                padding-top: 8px;
             }
         }
     }
@@ -48,31 +48,26 @@ body {
     align-items: center;
     height: 50px;
     background: darken(#7289da, 40%);
-    .login {
-        display: flex;
-        margin: auto 0;
-        user-select: none;
-        font-family: @heading-family;
-        color: #fff;
-        li {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-right: 6px;
-        }
-        .fab.icon {
-            margin: 0;
-            font-size: 2em;
-            color: inherit;
-        }
-        &:hover {
-            cursor: pointer;
-            color: lighten(#7289da, 30%);
-        }
-    }
     ul {
         margin: 0;
         padding: 0;
         list-style-type: none;
+        li {
+            font-size: 1.8em;
+            font-family: @heading-family;
+            color: #fff;
+        }
+    }
+    .logout {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1 1 auto;
+        a {
+            text-decoration: none;
+            &:hover {
+                color: lighten(#7289da, 25%)
+            }
+        }
     }
     .icon {
         margin: auto 16px;
