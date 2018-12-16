@@ -13,6 +13,10 @@ body {
     font-family: @content-family;
 }
 
+.disabled {
+    display: none;
+}
+
 .icon {
     user-select: none;
     font-size: 24px;
@@ -130,7 +134,7 @@ body {
     }
 }
 
-.AddNoteForm {
+.NoteForm {
     @max-width: 600px;
     @border-style: 1px solid @secondary-color;
     display: flex;
@@ -178,7 +182,7 @@ body {
         height: 32px;
         margin-top: 12px;
         box-sizing: border-box;
-        button {
+        input {
             width: 100px;
             margin-right: 12px;
             border: @border-style;
@@ -211,7 +215,7 @@ body {
             }
         }
         @media only screen and (@tablet) {
-            button {
+            input {
                 flex: 1;
             }
         }

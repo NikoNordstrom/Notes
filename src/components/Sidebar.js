@@ -5,7 +5,17 @@ export default class Sidebar extends Component {
     render() {
         return (
             <div className="Sidebar">
-                <Note title="Note title" date="13.12.2018" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+                {
+                    this.props.notes.map((note, i) => {
+                        return <Note
+                            key={note._id}
+                            date={note.date}
+                            title={note.title}
+                            content={note.content}
+                            id={note._id}
+                            showNote={this.props.showNote} />;
+                    })
+                }
             </div>
         );
     }

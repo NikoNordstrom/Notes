@@ -6,7 +6,7 @@
     "scripts": {
         "build": "webpack --mode production",
         "start": "webpack-dev-server --open --mode development",
-        "bstart": "webpack --mode production | node ."
+        "bstart": "webpack --mode development | node ."
     },
     "author": "Niko Nordström",
     "license": "ISC",
@@ -28,6 +28,7 @@
         "webpack-dev-server": "^3.1.10"
     },
     "dependencies": {
+        "body-parser": "^1.18.3",
         "connect-mongo": "^2.0.3",
         "dotenv": "^6.2.0",
         "express": "^4.16.4",

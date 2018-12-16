@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const bodyParser = require("body-parser");
 const Express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -11,7 +12,7 @@ if (fs.existsSync(path.resolve(__dirname, ".env"))) {
     require("dotenv").config();
 }
 
-const { noteSchema, userSchema } = require("./schemas");
+const { userSchema } = require("./schemas");
 const User = mongoose.model("User", userSchema);
 mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser: true
@@ -69,6 +70,7 @@ const ensureAuthenticated = (req, res, next) => {
 };
 app.get("/", ensureAuthenticated);
 app.use(Express.static(path.resolve(__dirname, "dist")));
+app.use(bodyParser.json());
 
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/auth/google" }), (req, res) => {
@@ -90,4 +92,32 @@ app.get("/logout", ensureAuthenticated, (req, res) => {
     });
     req.logout();
     res.redirect("/");
+});
+app.post("/note", ensureAuthenticated, (req, res) => {
+    console.log(req.body);
+    if (req.body.editing && req.body.id !== null) {
+        return User.findOneAndUpdate({ id: req.user.id, "notes._id": req.body.id }, {
+            $set: {
+                "notes.$.title": req.body.title,
+                "notes.$.content": req.body.content
+            }
+        }, { new: true }, (err, user) => {
+            if (err) {
+                console.error(err);
+                return res.end();
+            }
+            res.set("Content-Type", "application/json");
+            res.send(user.notes);
+        });
+    }
+    User.findOneAndUpdate({ id: req.user.id }, {
+        $push: { notes: req.body }
+    }, { new: true }, (err, user) => {
+        if (err) {
+            console.error(err);
+            return res.end();
+        }
+        res.set("Content-Type", "application/json");
+        res.send(user.notes);
+    });
 });

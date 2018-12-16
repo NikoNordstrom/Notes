@@ -1,7 +1,7 @@
 const { Schema } = require("mongoose");
 
 const noteSchema = new Schema({
-    date: Date,
+    date: Number,
     title: String,
     content: String
 });
@@ -9,8 +9,6 @@ const noteSchema = new Schema({
 const userSchema = new Schema({
     id: String,
     displayName: String,
-    created: Date,
-    lastLogin: Date,
     notes: [noteSchema]
 });
 
