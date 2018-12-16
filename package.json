@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
-        "start": "webpack-dev-server --open --mode development",
-        "bstart": "webpack --mode development | node ."
+        "start": "webpack --mode production | node .",
+        "devstart": "webpack-dev-server --open --mode development"
     },
     "author": "Niko Nordström",
     "license": "ISC",
