@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
-        "start": "node .",
+        "start": "node index.js",
         "devstart": "webpack-dev-server --open --mode development"
     },
     "author": "Niko Nordström",
