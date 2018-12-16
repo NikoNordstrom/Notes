@@ -19,14 +19,16 @@ export default class AddNoteForm extends Component {
                     placeholder="Write a note..."
                     spellCheck={false} />
                 <div className="btn-container">
-                    <input className={["cancel" + (!this.props.editing ? " disabled" : "")]}
+                    <input className={["delete" + (!this.props.editingId ? " disabled" : "")]}
                         type="button"
-                        name="action"
+                        value="Delete"
+                        onClick={this.props.onClick} />
+                    <input className={["cancel" + (!this.props.editingId ? " disabled" : "")]}
+                        type="button"
                         value="Cancel"
                         onClick={this.props.onClick} />
                     <input className="save"
                         type="button"
-                        name="action"
                         value="Save"
                         onClick={this.props.onClick} />
                 </div>

@@ -95,8 +95,8 @@ app.get("/logout", ensureAuthenticated, (req, res) => {
 });
 app.post("/note", ensureAuthenticated, (req, res) => {
     console.log(req.body);
-    if (req.body.editing && req.body.id !== null) {
-        return User.findOneAndUpdate({ id: req.user.id, "notes._id": req.body.id }, {
+    if (req.body.action === "edit" && req.body.id !== null) {
+        User.findOneAndUpdate({ id: req.user.id, "notes._id": req.body.id }, {
             $set: {
                 "notes.$.title": req.body.title,
                 "notes.$.content": req.body.content
@@ -110,14 +110,28 @@ app.post("/note", ensureAuthenticated, (req, res) => {
             res.send(user.notes);
         });
     }
-    User.findOneAndUpdate({ id: req.user.id }, {
-        $push: { notes: req.body }
-    }, { new: true }, (err, user) => {
-        if (err) {
-            console.error(err);
-            return res.end();
-        }
-        res.set("Content-Type", "application/json");
-        res.send(user.notes);
-    });
+    else if (req.body.action === "delete" && req.body.id) {
+        User.findOneAndUpdate({ id: req.user.id }, {
+            $pull: { notes: { _id: req.body.id } }
+        }, { new: true }, (err, user) => {
+            if (err) {
+                console.error(err);
+                return res.end();
+            }
+            res.set("Content-Type", "application/json");
+            res.send(user.notes);
+        });
+    }
+    else {
+        User.findOneAndUpdate({ id: req.user.id }, {
+            $push: { notes: req.body }
+        }, { new: true }, (err, user) => {
+            if (err) {
+                console.error(err);
+                return res.end();
+            }
+            res.set("Content-Type", "application/json");
+            res.send(user.notes);
+        });
+    }
 });

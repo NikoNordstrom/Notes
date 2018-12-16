@@ -3,6 +3,8 @@
 @font-color: darken(#fff, 60%);
 @primary-color: darken(#fff, 5%);
 @secondary-color: darken(#fff, 25%);
+@blue: #7289da;
+@red: #f04740;
 @tablet: ~"max-width: 768px";
 @mobile: ~"max-width: 625px";
 @sidebar-width: 300px;
@@ -51,7 +53,7 @@ body {
     display: flex;
     align-items: center;
     height: 50px;
-    background: darken(#7289da, 40%);
+    background: darken(@blue, 40%);
     ul {
         margin: 0;
         padding: 0;
@@ -69,7 +71,7 @@ body {
         a {
             text-decoration: none;
             &:hover {
-                color: lighten(#7289da, 25%)
+                color: lighten(@blue, 25%)
             }
         }
     }
@@ -205,16 +207,24 @@ body {
                 outline: 0;
             }
         }
-        .save {
-            @bg-color: #7289da;
+        .delete {
             border: 0;
             color: #fff;
-            background: @bg-color;
+            background: @red;
             &:hover {
-                background: darken(@bg-color, 10%);
+                background: darken(@red, 20%)
+            }
+        }
+        .save {
+            border: 0;
+            color: #fff;
+            background: @blue;
+            &:hover {
+                background: darken(@blue, 10%);
             }
         }
         @media only screen and (@tablet) {
+            flex-wrap: wrap-reverse;
             input {
                 flex: 1;
             }

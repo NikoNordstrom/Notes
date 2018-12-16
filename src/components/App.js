@@ -12,8 +12,8 @@ export default class App extends Component {
             notes: this.props.user.notes,
             noteFormTitle: "",
             noteFormContent: "",
-            noteFormEditing: false,
-            noteFormEditingId: null
+            noteFormEditingId: null,
+            noteFormDelete: false
         };
         this.onNoteFormChange = this.onNoteFormChange.bind(this);
         this.onNoteFormClick = this.onNoteFormClick.bind(this);
@@ -26,7 +26,12 @@ export default class App extends Component {
     }
     onNoteFormClick(event) {
         if (this.state.noteFormTitle === "" || this.state.noteFormContent === "") return;
-        if (event.target.value.toLowerCase() === "save") {
+        const value = event.target.value.toLowerCase();
+        if (["save", "delete"].includes(value)) {
+            let action = value;
+            if (action === "save" && this.state.noteFormEditingId !== null) action = "edit";
+            else if (action === "save") action = "create";
+            console.log(action);
             fetch("/note", {
                 method: "POST",
                 headers: {
@@ -34,7 +39,7 @@ export default class App extends Component {
                 },
                 body: JSON.stringify({
                     id: this.state.noteFormEditingId,
-                    editing: this.state.noteFormEditing,
+                    action: action,
                     date: Date.now(),
                     title: this.state.noteFormTitle,
                     content: this.state.noteFormContent,
@@ -48,7 +53,6 @@ export default class App extends Component {
         this.setState({
             noteFormTitle: "",
             noteFormContent: "",
-            noteFormEditing: false,
             noteFormEditingId: null
         });
     }
@@ -60,7 +64,6 @@ export default class App extends Component {
         this.setState({
             noteFormTitle: note.title,
             noteFormContent: note.content,
-            noteFormEditing: true,
             noteFormEditingId: note._id
         });
     }
@@ -78,7 +81,7 @@ export default class App extends Component {
                             onClick={this.onNoteFormClick}
                             title={this.state.noteFormTitle}
                             content={this.state.noteFormContent}
-                            editing={this.state.noteFormEditing} />
+                            editingId={this.state.noteFormEditingId} />
                     </div>
                 </div>
             </div>
