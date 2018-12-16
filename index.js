@@ -29,7 +29,7 @@ db.once("open", () => {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:8080/auth/google/callback"
+    callbackURL: process.env.CALLBACK_URL || "http://localhost:8080/auth/google/callback"
 }, (accessToken, refreshToken, profile, cb) => {
     User.findOneAndUpdate({ id: profile.id }, profile, { upsert: true, new: true }, (err, user) => {
         if (err) return console.error(err);
