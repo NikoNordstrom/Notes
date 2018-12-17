@@ -29,7 +29,7 @@ db.once("open", () => {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL || "http://localhost:8080/auth/google/callback"
+    callbackURL: process.env.CALLBACK_URL
 }, (accessToken, refreshToken, profile, cb) => {
     User.findOneAndUpdate({ id: profile.id }, profile, { upsert: true, new: true }, (err, user) => {
         if (err) return console.error(err);
@@ -62,8 +62,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const ensureAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated() && req.user) {
-        console.log(`${req.user.displayName} is authenticated.`);
+    if (req.isAuthenticated() && req.user != null) {
         return next();
     }
     res.redirect("/auth/google");
@@ -72,7 +71,7 @@ app.get("/", ensureAuthenticated);
 app.use(Express.static(path.resolve(__dirname, "dist")));
 app.use(bodyParser.json());
 
-app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
+app.get("/auth/google", passport.authenticate("google", { scope: ["profile"], prompt: "consent" }));
 app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/auth/google" }), (req, res) => {
     res.redirect("/");
 });
@@ -94,7 +93,6 @@ app.get("/logout", ensureAuthenticated, (req, res) => {
     res.redirect("/");
 });
 app.post("/note", ensureAuthenticated, (req, res) => {
-    console.log(req.body);
     if (req.body.action === "edit" && req.body.id !== null) {
         User.findOneAndUpdate({ id: req.user.id, "notes._id": req.body.id }, {
             $set: {
