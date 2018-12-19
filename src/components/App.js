@@ -13,11 +13,13 @@ export default class App extends Component {
             noteFormTitle: "",
             noteFormContent: "",
             noteFormEditingId: null,
-            noteFormDelete: false
+            noteFormDelete: false,
+            sidebarDisabled: false
         };
         this.onNoteFormChange = this.onNoteFormChange.bind(this);
         this.onNoteFormClick = this.onNoteFormClick.bind(this);
         this.showNote = this.showNote.bind(this);
+        this.toggleSidebar = this.toggleSidebar.bind(this);
     }
     onNoteFormChange(event) {
         this.setState({
@@ -67,14 +69,22 @@ export default class App extends Component {
             noteFormEditingId: note._id
         });
     }
+    toggleSidebar() {
+        this.setState(state => ({
+            sidebarDisabled: !state.sidebarDisabled
+        }));
+    }
     render() {
         return (
             <div className="App">
-                <Navbar displayName={this.state.displayName} />
+                <Navbar
+                    displayName={this.state.displayName}
+                    toggleSidebar={this.toggleSidebar} />
                 <div className="flex-container">
                     <Sidebar
                         notes={this.state.notes}
-                        showNote={this.showNote} />
+                        showNote={this.showNote}
+                        disabled={this.state.sidebarDisabled} />
                     <div className="container">
                         <NoteForm
                             onChange={this.onNoteFormChange}

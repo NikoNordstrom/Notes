@@ -16,7 +16,7 @@ body {
 }
 
 .disabled {
-    display: none;
+    display: none !important;
 }
 
 .icon {
@@ -94,7 +94,8 @@ body {
     border-right: 1px solid @secondary-color;
     background: #fff;
     @media only screen and (@mobile) {
-        display: none;
+        max-width: @sidebar-width - 50px;
+        min-width: @sidebar-width - 50px;
         position: absolute;
     }
 }

@@ -5,7 +5,7 @@ export default class Navbar extends Component {
         return (
             <nav className="Navbar">
                 <ul>
-                    <i className="material-icons icon">menu</i>
+                    <i className="material-icons icon" onClick={this.props.toggleSidebar}>menu</i>
                 </ul>
                 <ul>
                     <li><b>{this.props.displayName}</b></li>
