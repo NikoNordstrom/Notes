@@ -10,3 +10,37 @@ This is a web application for keeping track of your notes. When you first visit 
 * [Express](https://expressjs.com/)
 * [Passport](http://passportjs.org)
 * [MongoDB](https://www.mongodb.com/)
+
+## Installation guide
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+You need to obtain Google OAuth 2.0 credentials before you can continue.
+
+### Installing
+A step by step guide to get development environment running.
+1. Clone this repository.
+```
+git clone https://github.com/NikoNordstrom/Notes.git
+```
+2. Navigate to the cloned repository.
+```
+cd Notes
+```
+3. Install dependencies.
+```
+npm install
+```
+4. Create `.env` file to the root of the project folder. The `.env` file should look something like this:
+```
+CLIENT_ID=<your google oauth 2.0 client id>
+CLIENT_SECRET=<your google oauth 2.0 client secret>
+SESSION_SECRET=<insert some secure string here>
+CALLBACK_URL=http://localhost:8080/auth/google/callback
+DATABASE_URL=mongodb://localhost/notes
+PORT=8080
+```
+5. Run the app.
+```
+npm start
+```
