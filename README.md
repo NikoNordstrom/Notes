@@ -1,5 +1,5 @@
 # Notes
-This is a web application for keeping track of your notes. When you first visit the [website](https://notes-application-1.herokuapp.com) it redirects you to Google consent screen for authentication with Google OAuth 2.0. After successfull authentication you will be redirected to the main page where you can create, update, delete and view your notes. All notes that you have created are only associated with your current authenticated Google account in MongoDB. You can also logout anytime you want. The back-end will keep your session valid for 2 weeks.
+This is a web application for keeping track of your notes. When you first visit the [website](https://notes-application-1.herokuapp.com) it redirects you to Google consent screen for authentication with Google OAuth 2.0. After successfull authentication you will be redirected to the main page where you can create, read, update and delete your notes. All notes that you have created are only associated with your current authenticated Google account in MongoDB. You can also logout anytime you want. The back-end will keep your session valid for 2 weeks.
 
 ## Front-End
 * [React](https://reactjs.org/)
@@ -15,7 +15,7 @@ This is a web application for keeping track of your notes. When you first visit 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-You need to obtain Google OAuth 2.0 credentials before you can continue.
+You need to obtain Google OAuth 2.0 credentials before you can continue. You can get them from [here](https://console.developers.google.com/apis/credentials).
 
 ### Installing
 A step by step guide to get development environment running.
